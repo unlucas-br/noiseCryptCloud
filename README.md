@@ -5,7 +5,7 @@ Store files inside YouTube videos. Resilient to YouTube's compression using Reed
 ## Features
 
 - **Resilient Encoding**: 4×4 macro-pixels survive H.264/VP9/AV1 transcoding
-- **Error Correction**: Reed-Solomon 48/16 (25% redundancy)
+- **Error Correction**: Reed-Solomon 48/16 (75% redundancy) (300% overhead)
 - **Integrity**: SHA-256 global hash + CRC32 per frame
 - **Encryption**: ChaCha20-Poly1305 with Argon2id key derivation
 - **Progress UI**: Beautiful terminal interface with Bubble Tea
@@ -34,19 +34,19 @@ make build
 ### Encode a file to video
 
 ```bash
-./ncc.exe -mode=encode -input="document.pdf" -output="backup.avi"
+ncc -mode=encode -input="document.pdf" -output="backup.avi"
 
 # With encryption
-./ncc.exe -mode=encode -input="document.pdf" -output="backup.avi" -password="secret"
+ncc -mode=encode -input="document.pdf" -output="backup.avi" -password="secret"
 ```
 
 ### Decode video back to file
 
 ```bash
-./ncc.exe -mode=decode -input="backup.avi" -output="document_recovered.pdf"
+ncc  -mode=decode -input="backup.avi" -output="document_recovered.pdf"
 
 # With decryption
-./ncc.exe -mode=decode -input="backup.avi" -output="document_recovered.pdf" -password="secret"
+ncc -mode=decode -input="backup.avi" -output="document_recovered.pdf" -password="secret"
 ```
 
 ## How It Works
@@ -101,3 +101,4 @@ ncc/
 ## License
 
 MIT
+
